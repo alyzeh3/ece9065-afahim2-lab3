@@ -11,10 +11,12 @@ fetch("./Lab3-timetable-data.json")
 .then(function(data){
 console.log(data)
 
+
 });
 */
 //import subject from './Lab3-timetable-data.json'
 const schedule = require('./Lab3-timetable-data.json')
+app.use('/',express.static('static'));
 var sub;
 var i = 0
 for (i=0; i<schedule.length;i++){
@@ -65,10 +67,19 @@ app.get('/api/subjects/', (req,res) =>{
       
 });
 app.get('/api/subjects/:catalog_nbr', (req,res) =>{
-     //const subject1  = schedule.find(c => c.catalog_nbr == parseInt(schedule.catalog_nbr))
+    const nbr= req.params.catalog_nbr; 
+    const subject1  = schedule.find(p => p.catalog_nbr === parseInt(nbr))
      console.log(schedule[0].catalog_nbr)
  // if(!subject1) res.status(404).send('Subject not found')
-  //  res.send(subject1)
+  //res.send(subject1)
+if(subject1){
+res.send(subject1)
+}
+else{
+res.status(404).send('Catalog not found');
+}
+  //const nbr= req.params.catalog_nbr;
+  res.send('working on it')
   });
 
   app.post('/api/subjects/hi', (req,res) =>
