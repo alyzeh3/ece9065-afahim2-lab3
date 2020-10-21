@@ -1,7 +1,9 @@
 console.log("hello..");
+const { Router } = require('express');
 const express = require('express');
 const app = express();
 app.use(express.json());
+const router =express.Router();
 /*
 fetch("./Lab3-timetable-data.json")
 .//then(function(resp){
@@ -46,7 +48,7 @@ app.get('/api/posts/:year/:month', (req,res)=>{
     
     });
 
-app.get('/api/subjects/', (req,res) =>{
+router.get('/', (req,res) =>{
   //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
         //(res.send(schedule[0].subject));
       //  res.setHeader('Content-Type', 'text/html');
@@ -66,7 +68,7 @@ app.get('/api/subjects/', (req,res) =>{
         }
       
 });
-app.get('/api/subjects/:catalog_nbr', (req,res) =>{
+router.get('/:catalog_nbr', (req,res) =>{
     const nbr= req.params.catalog_nbr; 
     const subject1  = schedule.find(p => p.catalog_nbr === parseInt(nbr))
      console.log(schedule[0].catalog_nbr)
@@ -82,7 +84,7 @@ res.status(404).send('Catalog not found');
   res.send('working on it')
   });
 
-  app.post('/api/subjects/hi', (req,res) =>
+router.post('/hi', (req,res) =>
 {
 const schedule1 = {
      "schedule_name": req.body.subject,
@@ -94,6 +96,6 @@ schedule.push(schedule1)
 res.send(schedule1)
 console.log(schedule1)
 });
-
+app.use('/api/subjects', router)
 app.listen(3000, () => console.log('listening to port 3000..'))
 
