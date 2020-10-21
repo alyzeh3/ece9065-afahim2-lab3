@@ -1,6 +1,7 @@
 console.log("hello..");
 const express = require('express');
 const app = express();
+app.use(express.json());
 /*
 fetch("./Lab3-timetable-data.json")
 .//then(function(resp){
@@ -63,7 +64,25 @@ app.get('/api/subjects/', (req,res) =>{
         }
       
 });
+app.get('/api/subjects/:catalog_nbr', (req,res) =>{
+     //const subject1  = schedule.find(c => c.catalog_nbr == parseInt(schedule.catalog_nbr))
+     console.log(schedule[0].catalog_nbr)
+ // if(!subject1) res.status(404).send('Subject not found')
+  //  res.send(subject1)
+  });
 
+  app.post('/api/subjects/hi', (req,res) =>
+{
+const schedule1 = {
+     "schedule_name": req.body.subject,
+    "catalog_nbr": req.body.catalog_nbr,
+    "class_nbr": req.body.class_nbr,
+  
+};
+schedule.push(schedule1)
+res.send(schedule1)
+console.log(schedule1)
+});
 
 app.listen(3000, () => console.log('listening to port 3000..'))
 
