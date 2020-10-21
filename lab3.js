@@ -14,11 +14,13 @@ console.log(data)
 */
 //import subject from './Lab3-timetable-data.json'
 const schedule = require('./Lab3-timetable-data.json')
+var sub;
 var i = 0
-//for (i=0; i<schedule.length;i++){
-//console.log(schedule[i].subject)
-//}
-console.log(schedule.length)
+for (i=0; i<schedule.length;i++){
+sub = schedule[i].subject
+//console.log(schedule.length)
+//console.log(sub)
+}
 //app.get();
 //app.post();
 //app.delete();
@@ -41,20 +43,25 @@ app.get('/api/posts/:year/:month', (req,res)=>{
     
     });
 
-app.get('/api/subject/', (req,res) =>{
+app.get('/api/subjects/', (req,res) =>{
   //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
         //(res.send(schedule[0].subject));
       //  res.setHeader('Content-Type', 'text/html');
       console.log('sending request')
+     // res.setHeader('Content-Type', 'index/html');
+
       var i = 0,
         max = schedule.length
-        for ( i=0 ;i <= max; i++) {
+        for ( i=0 ;i < max; i++) {
+           // console.log(i)
+            res.write('<h1>Subject Name: ' + schedule[i].subject + '</h1>')
+            res.write('<h1>className: ' + schedule[i].className + '</h1>')
             //console.log(schedule[i].subject)
-       res.write(schedule[0].subject)
-       res.write(schedule[1].subject)
-         //res.write('<h1>This is the response #: ' + i + '</h1>');
-          }
-
+            //res.send(schedule[i].subject)
+           //res.write(sub)
+         
+        }
+      
 });
 
 
