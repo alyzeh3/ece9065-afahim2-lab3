@@ -18,9 +18,25 @@
         <button type="button">Search</button>
         <input class= "search1" type="text" id="myInput2" oninput="myFunction7()" placeholder = "Search By Course component">
         <button type="button">Search</button>
+        
 <ol id= "list">
 
 </ol>
+<ul id= "list1">
+  <input class = "search"  type="text" id="myInput3" placeholder = "Enter Schedule Name">
+  <body onload="addOptions();" >
+    Select Course
+    <select id="dd">
+   
+    <option value="course">Course</option>
+  </select>
+</body> 
+   <button type="button" onclick="myFunction11()"> Create schedule</button>
+</ul>
+
+
+
+
 
 <script> 
 
@@ -17915,4 +17931,43 @@ function myFunction7() {
  }
  }
  </script>
+
+
+<script>
+  function addOptions(){
+              //var jsonArray = JSON.parse(data);
+              var select = document.getElementById('dd');
+              var option;
+              for (var i = 0; i < schedule.length; i++) {
+                option = document.createElement('option');
+                option.text = schedule[i]["className"];
+                select.add(option);
+              }
+          }
+  
+  </script>
+
+  <script>
+    function  myFunction11(){
+
+      var x = document.getElementById("dd").value;
+      var name1 = document.getElementById("myInput3").value;
+      document.getElementById("demo").innerHTML = x;
+   //   document.getElementById("demo1").innerHTML = name1;
+      const schedulestu =  {
+      "name": "hello "
+
+      }
+      console.log(schedulestu["name"])
+      console.log(name1)
+      for (var i = 0; i<schedule.length ; i++){
+      schedulestu.name = name1;
+      document.getElementById("demo1").innerHTML = schedulestu.name;
+      console.log(schedulestu)
+      }
+
+
+    }
+  </script>
+  
 </html>
