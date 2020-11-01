@@ -1,3 +1,5 @@
+
+
 console.log("hello..");
 const { Router } = require('express');
 const express = require('express');
@@ -57,20 +59,28 @@ router.get('/', (req,res) =>{
         //(res.send(schedule[0].subject));
       //  res.setHeader('Content-Type', 'text/html');
       console.log('sending request')
+     // res.setHeader('Content-Type', 'application/json')
      // res.setHeader('Content-Type', 'index/html');
-
+    
+     //res.flush()
+     //res.write('<h1>Subject Name: ' + schedule[0].subject + '</h1>')
       var i = 0,
         max = schedule.length
         for ( i=0 ;i < max; i++) {
            // console.log(i)
-            res.write('<h1>Subject Name: ' + schedule[i].subject + '</h1>')
-            res.write('<h1>className: ' + schedule[i].className + '</h1>')
+          // res.write('<h1>Subject Name: ' + schedule[0].subject + '</h1>')
+            res.write('Subject Name: ' + schedule[i].subject )
+            res.write('className: ' + schedule[i].className )
+           // res.end('Hello World');
             //console.log(schedule[i].subject)
             //res.send(schedule[i].subject)
            //res.write(sub)
+           if (i == max-1){
+            res.end()
+           }
          
         }
-      
+        
 });
 
 router.get('/course', (req,res) =>{
@@ -96,20 +106,23 @@ router.get('/course', (req,res) =>{
 
 
 
-  router.get('/:catalog_nbr', (req,res) =>{
-    const nbr= req.params.catalog_nbr; 
-    const subject1  = schedule.find(p => p.catalog_nbr === parseInt(nbr))
-    console.log(schedule[0].catalog_nbr)
+  router.get('/:name', (req,res) =>{
+    // /name with catalog_nbr
+    const nbr= req.params.name; //replace name with catalognbr
+    const subject1  = schedule.find(p => p.name === parseInt(nbr))
+   // console.log(schedule[0].catalog_nbr)
+ //   console.log("HELLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+           
  // if(!subject1) res.status(404).send('Subject not found')
   //res.send(subject1)
 if(subject1){
-res.send(subject1)
+res.send(subject1.catalog_nbr)
 }
 else{
 res.status(404).send('Catalog not found');
 }
   //const nbr= req.params.catalog_nbr;
-  res.send('working on it')
+  //res.send('working on it')
   });
 
 
@@ -127,7 +140,13 @@ console.log(schedule1)
 });
 
 
-
+let allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Headers', "*");
+  res.header('Access-Control-Allow-Methods', "GET, POST, PUT, OPTIONS");
+  next();
+}
+app.use(allowCrossDomain);
 // create Schedule Name
 router.put('/schedule1', (req,res) =>
 {
@@ -140,7 +159,7 @@ if (sub>1){
     res.status(404).send('Schedule already exists, Please make another schedule')
 }
 else {
-
+ res.send('Making New Schedule')
     schedule.push(req.body);
 }
 res.send(schedule1)
@@ -170,6 +189,35 @@ router.put('/schedule3', (req,res) =>
    else{
        //replace schedule if existing is there with the name
        console.log('Creating/Modifying new schedule')
+     //  res.status('Creating/Modifying new Schedule')
+       schedule[sub] = req.body;
+   }
+   res.send(newsub);
+  
+});
+router.put('/schedule4', (req,res) =>
+{
+   const newsub = req.body
+   console.log("Subject: ", newsub)
+   //newsub.name =  parseInt(req.params.name)
+
+   const sub = schedule.findIndex(p=> p.name === newsub.name)
+   console.log(newsub.name)
+   console.log(sub)
+   //replace the part with new one.
+   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
+   
+   if(sub<1){
+       //create new schedule with the provided id 
+     console.log('Schedule not found')
+     res.status(404).send('Schedule not Found')
+     //schedule.push(req.body);
+
+   }
+   else{
+       //add course code and subject code
+       //enter in the following format "catalog_nbr","subject code" 
+       console.log('Creating/Modifying new schedule')
        schedule[sub] = req.body;
    }
    res.send(newsub);
@@ -189,6 +237,7 @@ router.delete('/schedule2', (req,res) =>
         console.log('successfully deleted')
         schedule.splice(index,1);
         res.send(sub);
+      //  res.send('works')
 });
 
 router.get('/getschedule', (req,res) =>{
@@ -212,8 +261,24 @@ router.get('/getschedule', (req,res) =>{
   });
 
 
+  router.get('/sch/:nbr', (req,res) =>{
+    const nbr= req.params.catalog_nbr; 
+    const subject1  = schedule.find(p => p.catalog_nbr === parseInt(nbr))
+   // const nam= req.params.catalog_nbr; 
+    //const subject1  = schedule.find(p => p.catalog_nbr === parseInt(nam))
+    console.log(nbr)
+ // if(!subject1) res.status(404).send('Subject not found')
+  //res.send(subject1)
+if(subject1){
+res.send(subject1)
+}
+else{
+res.status(404).send('Catalog not found');
+}
+  //const nbr= req.params.catalog_nbr;
+  //res.send('working on it')
 
-
+  });
 
 
 

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Western Time Table</title>
+    </head>
+    
+    <body>
+        <div class="header">
+            <h1>Western Time Table</h1>
+        </div>
+        <link rel="stylesheet" href="styles.css">
+        
+        <input class = "search"  type="text" id="myInput" oninput="myFunction2()" placeholder = "Search by Subject" > 
+        <input class= "search1" type="number" id="myInput1" onsearch="myFunction6()" placeholder = "Search By Course Number">
+        <button type="button">Search</button>
+<ul id= "list">
+
+</ul>
+<script> 
+schedule = 
+[
+{
+  "catalog_nbr": "1021B",
+  "subject": "ACTURSCI",
+  "className": "INTRO TO FINANCIAL SECURE SYS",
+  "course_info": [
+    {
+      "class_nbr": 5538,
+      "start_time": "8:30 AM",
+      "descrlong": "",
+      "end_time": "9:30 AM",
+      "campus": "Main",
+      "facility_ID": "PAB-106",
+      "days": [
+        "M",
+        "W",
+        "F"
+      ],
+      "instructors": [],
+      "class_section": "001",
+      "ssr_component": "LEC",
+      "enrl_stat": "Not full",
+      "descr": "RESTRICTED TO YR 1 STUDENTS."
+    }
+  ],
+  "catalog_description": "The nature and cause of financial security and insecurity; public, private and employer programs and products to reduce financial insecurity, including social security, individual insurance and annuities along with employee pensions and benefits.\n\nExtra Information: 3 lecture hours."
+},
+{
+    "catalog_nbr": "1020F",
+    "subject": "WRITING",
+    "className": "INTRO TO UNIV ESSAY WRITING",
+    "course_info": [
+      {
+        "class_nbr": 7702,
+        "start_time": "10:30 AM",
+        "descrlong": "",
+        "end_time": "11:30 AM",
+        "facility_ID": "BR-MRW152",
+        "days": [
+          "W"
+        ],
+        "instructors": [],
+        "class_section": 530,
+        "ssr_component": "LEC",
+        "enrl_stat": "Full",
+        "descr": "RESTRICTED TO STUDENTS REGISTERED AT AN AFFILIATED UNIVERSITY COLLEGE."
+      }
+    ],
+    "catalog_description": "A practical introduction to the basics of successful academic writing, designed for first-year students in all disciplines. Topics will range from grammar, sentence structure, and paragraphing to the principles of scholarly argument and research. \n\nAntirequisite(s): Writing 0002F/G, Writing 1002F/G, Writing 1021F/G, Writing 1022F/G, Writing 2101F/G.\n\nExtra Information: 3 lecture/tutorial hours. [This course will not serve as a prerequisite for any area of concentration]"
+  },
+]
+</script>
+</body>
+<p id="demo"></p>
+<p id="demo1"></p>
+<script>
+
+function myFunction2() {
+ var results = [];
+var searchField = "subject";
+//x =  document.getElementById("data");
+//console.log(schedule[0]["subject"])
+//document.getElementById("demo").innerHTML = schedule.su;
+var searchVal = document.getElementById("myInput").value;
+document.getElementById("demo").innerHTML = searchVal;
+//mydata = JSON.parse(Lab3-timetable-data);
+//schedule = JSON.stringify(data);
+//const schedule = import('./Lab3-timetable-data.json')
+//obj = JSON.parse(document.getElementById('data'));
+//const h = document.createElement('h');
+for (var i=0 ; i < 3 ; i++)
+{
+   console.log(schedule[1])
+  
+    //td = document.createTextNode(schedule[i].className);
+    td1 = document.createTextNode(schedule[i].catalog_nbr);
+    td3 = document.createTextNode(schedule[i].instructors);
+    td4 = document.createTextNode(schedule[i].enrl_stat);
+    td5 = document.createTextNode(schedule[i].catalog_description);
+    td6 = document.createTextNode(schedule[i].class_section);
+    td7 = document.createTextNode(schedule[i].ssr_component);
+    td8 = document.createTextNode(schedule[i].descr);
+    
+   
+    //console.log(schedule[0].subject)
+    //console.log(searchVal)
+    if (schedule[i].subject === searchVal) {
+        alert("hello")
+        h = document.createElement("H")
+       // textnode = document.createTextNode(mydata.list[i]);
+        // h.appendChild(td)
+        results.push(schedule[i]);
+        document.getElementById("demo1").innerHTML = results[i].className;
+      ;
+      //document.getElementById("list").appendChild(h);
+        document.getElementById("list").appendChild(td);
+        document.getElementById("list").appendChild(td1);
+        document.getElementById("list").appendChild(td3);
+        document.getElementById("list").appendChild(td4);
+        document.getElementById("list").appendChild(td5);
+        document.getElementById("list").appendChild(td6);
+        document.getElementById("list").appendChild(td7);
+        document.getElementById("list").appendChild(td8);
+
+       
+       
+    }
+   // console.log(schedule.subject[0])
+   var x;
+//   x =  document.getElementById("data");
+  // document.getElementById("demo").innerHTML = x;
+}
+}
+</script>
+
+</html>
