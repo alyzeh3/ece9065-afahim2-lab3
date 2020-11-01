@@ -9,6 +9,11 @@ fetch ('http://localhost:3000/api/subjects/')
 .then(res => res.text())
 .then(data =>{console.log(data)})
 .catch(error => console.log(error))
+
+fetch ('http://localhost:3000/api/subjects/ACTURSCI')
+.then(res => res.text())
+.then(data =>{console.log(data)})
+.catch(error => console.log(error))
 ///////////////////////
 fetch ('http://localhost:3000/api/subjects/schedule1',{
 method: 'PUT',
