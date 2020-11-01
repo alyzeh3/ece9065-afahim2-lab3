@@ -83,28 +83,49 @@ router.get('/', (req,res) =>{
         
 });
 
-router.get('/course', (req,res) =>{
-    //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
-          //(res.send(schedule[0].subject));
-        //  res.setHeader('Content-Type', 'text/html');
-        console.log('sending request')
-       // res.setHeader('Content-Type', 'index/html');
+router.get('/:subject', (req,res) =>{
+    const sub = req.params.subject; //replace name with catalognbr
+    console.log(sub)
+   max = schedule.length;
+    for (var i=0; i<5;i++){
+     // res.write('<h1>This is the response #: ' + i + '</h1>');
+     // res.end()
+    
+if (sub === schedule[i].subject){
+res.write(JSON.stringify(schedule[i].catalog_nbr))
+//res.write(schedule[i].catalog_nbr)
+//console.log(JSON.stringify(schedule[i]))
+//res.write('<h1>This is the response #: ' + i + '</h1>');
+//res.json(schedule[i])
+//res.write(schedule[i])
+//console.log(schedule[i])
+//console.log('hello!!!!!!!!!!!!!!!!!!!!')
+}
+    
+    else{
+      res.status(404).send('Catalog not found');
+
+    }
+  }
   
-        var i = 0,
-          max = schedule.length
-          for ( i=0 ;i < max; i++) {
-             // console.log(i)
-              res.write('<h1>Subject Name: ' + schedule[i].subject + '</h1>')
-              res.write('<h1>className: ' + schedule[i].className + '</h1>')
-              //console.log(schedule[i].subject)
-              //res.send(schedule[i].subject)
-             //res.write(sub)
-           
-          }
+  if (i == 5){
+  res.end()
+  }
+  
+ //   const subject1  = schedule.find(p => p.subject === parseInt(sub))
+     //const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
+    //(res.send(schedule[0].subject));
+    //  res.setHeader('Content-Type', 'text/html');
+       
+       // res.setHeader('Content-Type', 'index/html');
+       //if(subject1){
+       // res.send(subject1)
+        //}
+        //else{
+        //res.status(404).send('Catalog not found');
+        //}
         
   });
-
-
 
   router.get('/:name', (req,res) =>{
     // /name with catalog_nbr
