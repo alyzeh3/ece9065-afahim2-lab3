@@ -187,7 +187,7 @@ res.status(404).send('Schedule not found');
     const sub2 = req.params.course_info;
     const subject1  = schedule.find(p => p.subject === (sub))
    const subject2  = schedule.find(p => p.catalog_nbr === (sub1))
-   const subject3  = schedule.find(p => p.course_info.ssr_component === (sub2))
+  // const subject3  = schedule.find(p => p.course_info.ssr_component === (sub2))
    // console.log(schedule[0].catalog_nbr)
    console.log(sub)
    console.log(sub1)
@@ -247,7 +247,7 @@ if (sub>1){
 }
 else {
  res.send('Making New Schedule')
-    schedule.push(req.body);
+    schedule.push(schedule1);
 }
 res.send(schedule1)
 console.log(schedule1)
@@ -312,20 +312,51 @@ router.put('/schedule4', (req,res) =>
 });
 
 //delete schedule name
-router.delete('/schedule2', (req,res) =>
+router.delete('/coursedel/:name', (req,res) =>
 {
-    const sub = schedule.find(p=> p.name === parseInt(req.params.name))
+    const sub = schedule.find(p=> p.name === (req.params.name))
+    console.log(req.params.name)
+    console.log(sub)
+    if (!sub){
+        console.log('didnt work')
+        console.log(sub)
+        res.status(404).send('schedule doesnt exist')
+      //  res.send('schedule doesnt exist')
+    }
+    console.log(sub)
+        const index = schedule.indexOf(sub)
+        console.log('successfully deleted')
+        schedule.splice(index,1);
+        res.send('Deleted')
+     //  res.end();
+       // res.write(sub);
+      //  res.send('works')
+});
 
+router.delete('/scheduledeleteall', (req,res) =>
+{
+  //  const sub = schedule.find(p=> p.name === parseInt(req.params.name))
+for (var i =0; schedule.length; i++){
+if(schedule[i].name){
+  schedule.splice(i,1)
+  res.send('Deleted')
+  console.log(schedule[i].name)
+}
+}
     if (!sub){
         console.log('didnt work')
         res.status(404).send('schedule doesnt exist')
+      //  res.send('schedule doesnt exist')
     }
         const index = schedule.indexOf(sub)
         console.log('successfully deleted')
         schedule.splice(index,1);
-        res.send(sub);
+        res.send('Deleted')
+     //  res.end();
+       // res.write(sub);
       //  res.send('works')
 });
+
 
 router.get('/getschedule', (req,res) =>{
     //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
