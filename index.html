@@ -54,8 +54,7 @@ const schedulestu =  [
         
         <script src="script.js">
         </script>
-        <ol id= "list">
-        </ol>
+        
 
 
 <input class = "search"  type="text" id="myInput3" placeholder = "Enter Schedule Name">
@@ -68,7 +67,8 @@ const schedulestu =  [
  <button type="button" onclick="myFunction11()"> Create Schedule</button>
  <button type="button" onclick="myFunction12()"> Retrieve Schedule Names</button>
  <button type="button" onclick="myFunction13()"> Retrieve Timetables for Schedules</button>
-
+ <ol id= "list">
+</ol>
 <ul id= "list1">
 </ul>
 <ul id ="list2">
@@ -17817,19 +17817,32 @@ document.getElementById("demo").innerHTML = searchVal;
 //const h = document.createElement('h');
 for (var i=0 ; i < schedule.length ; i++)
 {
+
+  var br = document.createElement("br");
+        var br1 = document.createElement("br");
+        var br2 = document.createElement("br");
+        var br3 = document.createElement("br");
+        var br3 = document.createElement("br");
+        var br4 = document.createElement("br");
+        var br5 = document.createElement("br");
+        var br6 = document.createElement("br");
+        var br7 = document.createElement("br");
+        var br8 = document.createElement("br");
+        
+        var br9 = document.createElement("br");
    //console.log(schedule[i].className)
-   td = document.createTextNode(schedule[i]);
-  
-    td = document.createTextNode(schedule[i].className);
-    td1 = document.createTextNode(schedule[i].catalog_nbr);
-    td3 = document.createTextNode(schedule[i].instructors);
-    td4 = document.createTextNode(schedule[i].enrl_stat);
-    td5 = document.createTextNode(schedule[i].catalog_description);
-    td6 = document.createTextNode(schedule[i].class_section);
-    td7 = document.createTextNode(schedule[i].ssr_component);
-    td8 = document.createTextNode(schedule[i].descr);
-    
-   
+ //  td = document.createTextNode(schedule[i]);
+    td1 = document.createTextNode(schedule[i].className);
+    td2 = document.createTextNode(schedule[i].catalog_nbr);
+    td3 = document.createTextNode(schedule[i].catalog_description);
+    td4 = document.createTextNode(schedule[i].course_info[0].campus);
+      td5 = document.createTextNode(schedule[i].course_info[0].facility_ID);
+      td6 = document.createTextNode(schedule[i].course_info[0].days);
+      td7 = document.createTextNode(schedule[i].course_info[0].instructors);
+      td8 = document.createTextNode(schedule[i].course_info[0].class_section);
+      td9 = document.createTextNode(schedule[i].course_info[0].ssr_component);
+      td10 = document.createTextNode(schedule[i].course_info[0].enrl_stat);
+      td11 = document.createTextNode(schedule[i].course_info[0].descr);
     //console.log(schedule[0].subject)
     //console.log(searchVal)
     if (schedule[i].subject === searchVal) {
@@ -17845,17 +17858,30 @@ for (var i=0 ; i < schedule.length ; i++)
       ;
       //document.getElementById("list").appendChild(h);
       
-      document.getElementById("list").appendChild(td);
-      
+      //document.getElementById("list").appendChild(td);
         document.getElementById("list").appendChild(td1);
+        document.getElementById("list").appendChild(br9);
+        document.getElementById("list").appendChild(td2);
+        document.getElementById("list").appendChild(br);
         document.getElementById("list").appendChild(td3);
+        document.getElementById("list").appendChild(br1);
         document.getElementById("list").appendChild(td4);
+        document.getElementById("list").appendChild(br2);
         document.getElementById("list").appendChild(td5);
+        document.getElementById("list").appendChild(br3);
         document.getElementById("list").appendChild(td6);
+        document.getElementById("list").appendChild(br4);
         document.getElementById("list").appendChild(td7);
+        document.getElementById("list").appendChild(br5);
         document.getElementById("list").appendChild(td8);
+        document.getElementById("list").appendChild(br6);
+        document.getElementById("list").appendChild(td9);
+        document.getElementById("list").appendChild(br7);
+        document.getElementById("list").appendChild(td10);
+        document.getElementById("list").appendChild(br8);
+        document.getElementById("list").appendChild(td11);
 
-       
+    
        
     }
    // console.log(schedule.subject[0])
@@ -17880,19 +17906,35 @@ function myFunction6() {
  //const schedule = import('./Lab3-timetable-data.json')
  //obj = JSON.parse(document.getElementById('data'));
  //const h = document.createElement('h');
+ var br = document.createElement("br");
+        var br1 = document.createElement("br");
+        var br2 = document.createElement("br");
+        var br3 = document.createElement("br");
+        var br3 = document.createElement("br");
+        var br4 = document.createElement("br");
+        var br5 = document.createElement("br");
+        var br6 = document.createElement("br");
+        var br7 = document.createElement("br");
+        var br8 = document.createElement("br");
  for (var i=0 ; i < schedule.length ; i++)
  {
     //console.log(schedule[i].className)
     td = document.createTextNode(schedule[i]);
    
      td = document.createTextNode(schedule[i].className);
+     
      td1 = document.createTextNode(schedule[i].catalog_nbr);
-     td3 = document.createTextNode(schedule[i].instructors);
-     td4 = document.createTextNode(schedule[i].enrl_stat);
+   //  td3 = document.createTextNode(schedule[i].instructors);
+    // td4 = document.createTextNode(schedule[i].enrl_stat);
      td5 = document.createTextNode(schedule[i].catalog_description);
-     td6 = document.createTextNode(schedule[i].class_section);
-     td7 = document.createTextNode(schedule[i].ssr_component);
-     td8 = document.createTextNode(schedule[i].descr);
+     td6 = document.createTextNode(schedule[i].course_info[0].campus);
+      td7 = document.createTextNode(schedule[i].course_info[0].facility_ID);
+      td8 = document.createTextNode(schedule[i].course_info[0].days);
+      td9 = document.createTextNode(schedule[i].course_info[0].instructors);
+      td10 = document.createTextNode(schedule[i].course_info[0].class_section);
+      td11 = document.createTextNode(schedule[i].course_info[0].ssr_component);
+      td12 = document.createTextNode(schedule[i].course_info[0].enrl_stat);
+      td13 = document.createTextNode(schedule[i].course_info[0].descr);
      
     
      //console.log(schedule[0].subject)
@@ -17912,14 +17954,26 @@ function myFunction6() {
        //document.getElementById("list").appendChild(h);
        
        document.getElementById("list").appendChild(td);
-       
+       document.getElementById("list").appendChild(br);
          document.getElementById("list").appendChild(td1);
-         document.getElementById("list").appendChild(td3);
-         document.getElementById("list").appendChild(td4);
+         document.getElementById("list").appendChild(br1);
+     //   document.getElementById("list").appendChild(td3);
+         
+       //  document.getElementById("list").appendChild(td4);
+         document.getElementById("list").appendChild(br3);
          document.getElementById("list").appendChild(td5);
+         document.getElementById("list").appendChild(br4);
          document.getElementById("list").appendChild(td6);
+         document.getElementById("list").appendChild(br5);
          document.getElementById("list").appendChild(td7);
+         document.getElementById("list").appendChild(br6);
          document.getElementById("list").appendChild(td8);
+         document.getElementById("list").appendChild(br7);
+         document.getElementById("list").appendChild(td9);
+         document.getElementById("list").appendChild(td10);
+         document.getElementById("list").appendChild(td11);
+         document.getElementById("list").appendChild(td12);
+         document.getElementById("list").appendChild(td13);
  
         
         
