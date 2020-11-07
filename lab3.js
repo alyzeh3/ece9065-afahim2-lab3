@@ -53,6 +53,8 @@ app.get('/api/posts/:year/:month', (req,res)=>{
     res.send(req.params)
     
     });
+  
+    /////////////////TASK 1////////////////////////////////////
 
 router.get('/', (req,res) =>{
   //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
@@ -83,16 +85,257 @@ router.get('/', (req,res) =>{
         
 });
 
+/////////////////// TASK 6///////////////////////////////////////
+
+router.get('/alyzeh/:name', (req,res) =>{
+  // /name with catalog_nbr
+  //have to and the results
+  const sub= req.params.name //replace name with catalognbr
+  for( var i= 0 ; i<schedule.length; i++){
+const sub = schedule[i].name;
+console.log(schedule[i].name)
+  }
+  const subject1  = schedule.find(p => p.name === (sub))
+ // console.log(schedule[0].catalog_nbr)
+ console.log(sub)
+//  console.log(schedule[0].course_info[0].ssr_component)
+// console.log(subject2)
+ console.log(subject1)
+// if(!subject1) res.status(404).send('Subject not found')
+//res.send(subject1)
+if(subject1){
+res.write(JSON.stringify(subject1.catalog_nbr))
+res.write(JSON.stringify(subject1.subject))
+res.end()
+}
+else{
+res.status(404).send('Schedule not found');
+}
+//const nbr= req.params.catalog_nbr;
+//res.send('working on it')
+});
+
+/////////////////////////// TASK 3/////////////////////////////
+router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:course_info', (req,res) =>{
+  // /name with catalog_nbr
+  //have to and the results
+  const sub= req.params.subject; //replace name with catalognbr
+  const sub1 = req.params.catalog_nbr;
+  const sub2 = req.params.course_info;
+  const subject1  = schedule.find(p => p.subject === (sub))
+ const subject2  = schedule.find(p => p.catalog_nbr === (sub1))
+// const subject3  = schedule.find(p => p.course_info.ssr_component === (sub2))
+ // console.log(schedule[0].catalog_nbr)
+ console.log(sub)
+ console.log(sub1)
+ console.log(sub2)
+//  console.log(schedule[0].course_info[0].ssr_component)
+// console.log(subject2)
+// console.log(subject3)
+//  console.log(subject2)
+// if(subject2 !=0 && subject1!=0){
+//console.log('yup')
+
+// }
+// console.log(subject2)
+// if(!subject1) res.status(404).send('Subject not found')
+//res.send(subject1)
+if(subject2){
+res.send(subject2)
+}
+else{
+res.status(404).send('Catalog not found');
+}
+//const nbr= req.params.catalog_nbr;
+//res.send('working on it')
+});
+router.get('/schedulenames', (req,res) =>{
+  //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
+        //(res.send(schedule[0].subject));
+      //  res.setHeader('Content-Type', 'text/html');
+      console.log('sending request')
+     // res.setHeader('Content-Type', 'application/json')
+     // res.setHeader('Content-Type', 'index/html');
+    
+     //res.flush()
+     //res.write('<h1>Subject Name: ' + schedule[0].subject + '</h1>')
+      var i = 0,
+      count = 0;
+        max = schedule.length
+        for ( i=0 ;i < max; i++) {
+           // console.log(i)
+          // res.write('<h1>Subject Name: ' + schedule[0].subject + '</h1>')
+           
+            if( schedule[i].name !=undefined)
+            {
+              res.write('Schedule Name: ' + schedule[i].name )
+              res.write('Courses ' + schedule[i].courses )
+            }
+            
+            if(schedule[i].catalog_nbr1){
+             count++;
+             console.log(count)
+            }
+          if (i == max-1){
+          res.end()
+           }
+         
+        }
+      //  res.send(count);
+        
+});
+
+////////////////////// TASK 4///////////////////////////////////
+router.put('/schedule1', (req,res) =>
+{
+const schedule1 ={
+    "name": req.body.name,
+    "courses" : 0
+};
+const newsub = req.body;
+const sub = schedule.findIndex(p=> p.name === newsub.name)
+if (sub>1){
+    res.status(404).send('Schedule already exists, Please make another schedule')
+}
+else {
+ res.send('Making New Schedule')
+    schedule.push(schedule1);
+}
+res.send(schedule1)
+console.log(schedule1)
+});
+
+
+
+
+
+
+
+
+///////////////////////// TASK 4////////////////////////////
+//item 5, save list of subject code and course code
+router.put('/schedule3', (req,res) =>
+{
+   const newsub = req.body
+   console.log("Subject: ", newsub)
+   //newsub.name =  parseInt(req.params.name)
+
+   const sub = schedule.findIndex(p=> p.name === newsub.name)
+   console.log(newsub.name)
+   console.log(sub)
+   //replace the part with new one.
+   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
+   
+   if(sub<1){
+       //create new schedule with the provided id 
+     console.log('Schedule not found')
+     res.status(404).send('Schedule not Found')
+     //schedule.push(req.body);
+
+   }
+   else{
+       //replace schedule if existing is there with the name
+       console.log('Creating/Modifying new schedule')
+     //  res.status('Creating/Modifying new Schedule')
+       schedule[sub] = req.body;
+   }
+   res.send(newsub);
+  
+});
+
+
+router.post('/schedule10/:name', (req,res) =>
+{
+   //const newsub = req.body
+   const newsub = req.params.name;
+   console.log("Subject: ", newsub)
+   //newsub.name =  parseInt(req.params.name)
+
+   const sub = schedule.findIndex(p=> p.name === (req.params.name))
+   console.log(sub)
+   console.log(newsub)
+   //replace the part with new one.
+   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
+   
+   if(sub<1){
+       //create new schedule with the provided id 
+     console.log('Schedule not found')
+     res.status(404).send('Schedule not Found')
+     //schedule.push(req.body);
+
+   }
+   else{
+       //replace schedule if existing is there with the name
+       console.log('Creating/Modifying new schedule')
+     //  res.status('Creating/Modifying new Schedule')
+     //  schedule[sub] = req.body;
+     schedule[sub].catalog_nbr = req.body.catalog_nbr;
+     schedule[sub].subject = req.body.subject;
+       schedule[sub].courses += parseInt(req.body.courses)
+       console.log(req.body.courses)
+      // console.log("HELLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+   }
+ //  res.send(newsub);
+ res.send(req.body);
+  
+});
+
+
+
+//////////////////////////TASK 5////////////////////////////////
+
+
+router.put('/schedule4', (req,res) =>
+{
+   const newsub = req.body
+   console.log("Subject: ", newsub)
+   //newsub.name =  parseInt(req.params.name)
+
+   const sub = schedule.findIndex(p=> p.name === newsub.name)
+   console.log(newsub.name)
+   console.log(sub)
+   //replace the part with new one.
+   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
+   
+   if(sub<1){
+       //create new schedule with the provided id 
+     console.log('Schedule not found')
+     res.status(404).send('Schedule not Found')
+     //schedule.push(req.body);
+
+   }
+   else{
+       //add course code and subject code
+       //enter in the following format "catalog_nbr","subject code" 
+       console.log('Creating/Modifying new schedule')
+       schedule[sub] = req.body;
+   }
+   res.send(newsub);
+  
+});
+
+////////////////////// TASK 2///////////////////////
 router.get('/:subject', (req,res) =>{
-    const sub = req.params.subject; //replace name with catalognbr
-    console.log(sub)
+    const sub = req.params.subject;
+    console.log(sub) //replace name with catalognbr
+    const subject1  = schedule.find(p => p.subject === sub)
+    if(subject1 === undefined){
+      res.status(404).send('Subject Doesnt Exist');
+    }
+    //console.log(subject1)
+   // res.send(subject1.catalog_nbr)
+ // res.write(JSON.stringify(subject1.catalog_nbr))
+   // res.end()
+    //console.log(sub)
+    //console.log(subject1)
    max = schedule.length;
-    for (var i=0; i<5;i++){
+    for (var i=0; i<schedule.length;i++){ 
      // res.write('<h1>This is the response #: ' + i + '</h1>');
      // res.end()
-    
-if (sub === schedule[i].subject){
-res.write(JSON.stringify(schedule[i].catalog_nbr))
+     console.log(schedule[i].subject)
+       if (sub === schedule[i].subject){
+        res.write(JSON.stringify(schedule[i].catalog_nbr))
+       //  console.log(max)
 //res.write(schedule[i].catalog_nbr)
 //console.log(JSON.stringify(schedule[i]))
 //res.write('<h1>This is the response #: ' + i + '</h1>');
@@ -102,13 +345,15 @@ res.write(JSON.stringify(schedule[i].catalog_nbr))
 //console.log('hello!!!!!!!!!!!!!!!!!!!!')
 }
     
-    else{
-      res.status(404).send('Subject Doesnt Exist');
 
-    }
+      //res.status(404).send('Subject Doesnt Exist');
+      if(!schedule[i]){
+        res.status(404).send('Subject Doesnt Exist');
+      }
+    
   }
-  
-  if (i == 5){
+  if (i == max){
+    //res.status(404).send('Subject Doesnt Exist');
   res.end()
   }
   
@@ -146,73 +391,6 @@ res.status(404).send('Catalog not found');
   //res.send('working on it')
   });
 
-
-  router.get('/alyzeh/:name', (req,res) =>{
-    // /name with catalog_nbr
-    //have to and the results
-    const sub= req.params.name //replace name with catalognbr
-    for( var i= 0 ; i<schedule.length; i++){
-const sub = schedule[i].name;
-console.log(schedule[i].name)
-    }
-    const subject1  = schedule.find(p => p.name === (sub))
-   // console.log(schedule[0].catalog_nbr)
-   console.log(sub)
- //  console.log(schedule[0].course_info[0].ssr_component)
-  // console.log(subject2)
-   console.log(subject1)
- // if(!subject1) res.status(404).send('Subject not found')
-  //res.send(subject1)
-if(subject1){
-res.write(JSON.stringify(subject1.catalog_nbr))
-res.write(JSON.stringify(subject1.subject))
-res.end()
-}
-else{
-res.status(404).send('Schedule not found');
-}
-  //const nbr= req.params.catalog_nbr;
-  //res.send('working on it')
-  });
-
-
-
-
-
-  router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:course_info', (req,res) =>{
-    // /name with catalog_nbr
-    //have to and the results
-    const sub= req.params.subject; //replace name with catalognbr
-    const sub1 = req.params.catalog_nbr;
-    const sub2 = req.params.course_info;
-    const subject1  = schedule.find(p => p.subject === (sub))
-   const subject2  = schedule.find(p => p.catalog_nbr === (sub1))
-  // const subject3  = schedule.find(p => p.course_info.ssr_component === (sub2))
-   // console.log(schedule[0].catalog_nbr)
-   console.log(sub)
-   console.log(sub1)
-   console.log(sub2)
- //  console.log(schedule[0].course_info[0].ssr_component)
-  // console.log(subject2)
-   console.log(subject3)
- //  console.log(subject2)
-  // if(subject2 !=0 && subject1!=0){
-//console.log('yup')
-
-  // }
-  // console.log(subject2)
- // if(!subject1) res.status(404).send('Subject not found')
-  //res.send(subject1)
-if(subject2){
-res.send(subject2)
-}
-else{
-res.status(404).send('Catalog not found');
-}
-  //const nbr= req.params.catalog_nbr;
-  //res.send('working on it')
-  });
-
   router.post('/schedule', (req,res) =>
 {
 const schedule1 = {
@@ -234,83 +412,9 @@ let allowCrossDomain = function(req, res, next) {
   next();
 }
 app.use(allowCrossDomain);
-// create Schedule Name
-router.put('/schedule1', (req,res) =>
-{
-const schedule1 ={
-    "name": req.body.name
-};
-const newsub = req.body;
-const sub = schedule.findIndex(p=> p.name === newsub.name)
-if (sub>1){
-    res.status(404).send('Schedule already exists, Please make another schedule')
-}
-else {
- res.send('Making New Schedule')
-    schedule.push(schedule1);
-}
-res.send(schedule1)
-console.log(schedule1)
-});
 
-//item 5, save list of subject code and course code
-router.put('/schedule3', (req,res) =>
-{
-   const newsub = req.body
-   console.log("Subject: ", newsub)
-   //newsub.name =  parseInt(req.params.name)
 
-   const sub = schedule.findIndex(p=> p.name === newsub.name)
-   console.log(newsub.name)
-   console.log(sub)
-   //replace the part with new one.
-   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
-   
-   if(sub<1){
-       //create new schedule with the provided id 
-     console.log('Schedule not found')
-     res.status(404).send('Schedule not Found')
-     //schedule.push(req.body);
-
-   }
-   else{
-       //replace schedule if existing is there with the name
-       console.log('Creating/Modifying new schedule')
-     //  res.status('Creating/Modifying new Schedule')
-       schedule[sub] = req.body;
-   }
-   res.send(newsub);
-  
-});
-router.put('/schedule4', (req,res) =>
-{
-   const newsub = req.body
-   console.log("Subject: ", newsub)
-   //newsub.name =  parseInt(req.params.name)
-
-   const sub = schedule.findIndex(p=> p.name === newsub.name)
-   console.log(newsub.name)
-   console.log(sub)
-   //replace the part with new one.
-   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
-   
-   if(sub<1){
-       //create new schedule with the provided id 
-     console.log('Schedule not found')
-     res.status(404).send('Schedule not Found')
-     //schedule.push(req.body);
-
-   }
-   else{
-       //add course code and subject code
-       //enter in the following format "catalog_nbr","subject code" 
-       console.log('Creating/Modifying new schedule')
-       schedule[sub] = req.body;
-   }
-   res.send(newsub);
-  
-});
-
+////////////////// TASK 7///////////////////////
 //delete schedule name
 router.delete('/coursedel/:name', (req,res) =>
 {
@@ -333,28 +437,24 @@ router.delete('/coursedel/:name', (req,res) =>
       //  res.send('works')
 });
 
+/////////////////////// TASK 9/////////////////////////
+
 router.delete('/scheduledeleteall', (req,res) =>
 {
+  //console.log(schedule)
   //  const sub = schedule.find(p=> p.name === parseInt(req.params.name))
-for (var i =0; schedule.length; i++){
+for (var i =0; i< schedule.length; i++){
 if(schedule[i].name){
   schedule.splice(i,1)
   res.send('Deleted')
-  console.log(schedule[i].name)
+  break
 }
 }
-    if (!sub){
-        console.log('didnt work')
-        res.status(404).send('schedule doesnt exist')
-      //  res.send('schedule doesnt exist')
-    }
-        const index = schedule.indexOf(sub)
-        console.log('successfully deleted')
-        schedule.splice(index,1);
-        res.send('Deleted')
-     //  res.end();
-       // res.write(sub);
-      //  res.send('works')
+for (var j =0; j<schedule.length; j++){
+if (schedule[j].name == undefined)
+//console.log('hello!!!!!!!!!!!!!!!!!!')
+res.status(404).send('Deleted All')
+}
 });
 
 
