@@ -44,29 +44,43 @@ const schedulestu =  [
             <h1>Western Time Table</h1>
         </div>
         <link rel="stylesheet" href="styles.css">
-        
-        <input class = "search"  type="text" id="myInput" oninput="myFunction2()" placeholder = "Search by Subject" > 
-        <button type="button">Search</button>
+        <p id = 'p'>Search for Courses</p>
+        <input class = "search1"  type="text" id="myInput" oninput="myFunction2()" placeholder = "Search by Subject" > 
+        <button class = "search"type="button">Search</button>
         <input class= "search1" type="text" id="myInput1" oninput="myFunction6()" placeholder = "Search By Class Name">
-        <button type="button">Search</button>
+        <button class = "search" type="button">Search</button>
         <input class= "search1" type="text" id="myInput2" oninput="myFunction7()" placeholder = "Search By Course component">
-        <button type="button">Search</button>
+        <button class = "search"type="button">Search</button>
         
         <script src="script.js">
         </script>
         
 
+<br>
+<p id = 'para'>
+ Create Schedule
 
-<input class = "search"  type="text" id="myInput3" placeholder = "Enter Schedule Name">
+</p>
+<input class = "search1"  type="text" id="myInput3" placeholder = "Enter Schedule Name">
+
+
 <body onload="addOptions()">
   Select Course No1
   <select id="dd">
   <option value="course">Course</option>
 </select>
+<body onload="addOptions1()"></body>
+<select id = "dd1">
+    <option value="course">Course</option>
+  </select>
+
 </body> 
- <button type="button" onclick="myFunction11()"> Create Schedule</button>
- <button type="button" onclick="myFunction12()"> Retrieve Schedule Names</button>
- <button type="button" onclick="myFunction13()"> Retrieve Timetables for Schedules</button>
+
+ <button class = "search" type="button" onclick="myFunction11()"> Create Schedule</button>
+ <button class = "search" type="button" onclick="myFunction12()"> Retrieve Schedule Names</button>
+ <button class = "search" type="button" onclick="myFunction13()"> Retrieve Timetables for Schedules</button>
+ <button class = "search" type="button"> Delete Schedule</button>
+ <button class = "search" type="button"> Delete All Schedules</button>
  <ol id= "list">
 </ol>
 <ul id= "list1">
@@ -103,6 +117,10 @@ const schedulestu =  [
 
 </ul>
 <ul id = "list17">
+
+</ul>
+
+<ul id = "list18">
 
 </ul>
 <script> 
@@ -17828,11 +17846,13 @@ for (var i=0 ; i < schedule.length ; i++)
         var br6 = document.createElement("br");
         var br7 = document.createElement("br");
         var br8 = document.createElement("br");
-        
         var br9 = document.createElement("br");
+        var br9 = document.createElement("br");
+        var br10 = document.createElement("br");
    //console.log(schedule[i].className)
  //  td = document.createTextNode(schedule[i]);
     td1 = document.createTextNode(schedule[i].className);
+    td12 = document.createTextNode(schedule[i].subject);
     td2 = document.createTextNode(schedule[i].catalog_nbr);
     td3 = document.createTextNode(schedule[i].catalog_description);
     td4 = document.createTextNode(schedule[i].course_info[0].campus);
@@ -17861,6 +17881,8 @@ for (var i=0 ; i < schedule.length ; i++)
       //document.getElementById("list").appendChild(td);
         document.getElementById("list").appendChild(td1);
         document.getElementById("list").appendChild(br9);
+        document.getElementById("list").appendChild(td12);
+        document.getElementById("list").appendChild(br10)
         document.getElementById("list").appendChild(td2);
         document.getElementById("list").appendChild(br);
         document.getElementById("list").appendChild(td3);
@@ -18056,7 +18078,7 @@ function myFunction7() {
 
 <script>
   document.getElementById("dd").addEventListener("load", addOptions);
-  document.getElementById("list").addEventListener("load", addOptions1);
+  document.getElementById("dd1").addEventListener("load", addOptions1);
 
   function addOptions(){
               //var jsonArray = JSON.parse(data);
@@ -18107,6 +18129,7 @@ function myFunction7() {
       var searchVal2= document.getElementById("dd").value
       if (schedule[i].className === searchVal2) {
         element.className = schedule[i].className;
+        element.subject = schedule[i].subject;
         element.catalog_nbr = schedule[i].catalog_nbr;
         element.course_info = schedule[i].course_info;
         element.catalog_description = schedule[i].catalog_description;
@@ -18143,7 +18166,7 @@ function myFunction7() {
      //schedulestu.push(name1);
    document.getElementById("list2").appendChild(td);
      document.getElementById("list2").appendChild(br);
-    document.getElementById("list2").appendChild(td1);
+ //   document.getElementById("list2").appendChild(td1);
  //   document.getElementById("list2").appendChild(br1);
   //   document.getElementById("list2").appendChild(td2);
   ///   document.getElementById("list2").appendChild(br2);
@@ -18181,8 +18204,11 @@ function myFunction7() {
       var br13= document.createElement("br");
       var br14= document.createElement("br");
       var br15= document.createElement("br");
+      var br16= document.createElement("br");
       td1 = document.createTextNode(schedulestu[i].className);
       td2 = document.createTextNode(schedulestu[i].catalog_nbr);
+      td16 = document.createTextNode(schedulestu[i].subject);
+      console.log(td16)
       td3 = document.createTextNode(schedulestu[i].course_info[0].class_nbr);
       td5 = document.createTextNode(schedulestu[i].course_info[0].start_time);
       td6 = document.createTextNode(schedulestu[i].course_info[0].descrlong);
@@ -18209,6 +18235,7 @@ function myFunction7() {
    document.getElementById("list2").appendChild(td);
    document.getElementById("list2").appendChild(br);
    document.getElementById("list3").appendChild(td1);
+  
    document.getElementById("list3").appendChild(br1);
    document.getElementById("list4").appendChild(td2);
    document.getElementById("list4").appendChild(br2);
@@ -18230,6 +18257,10 @@ function myFunction7() {
    document.getElementById("list15").appendChild(td13);
    document.getElementById("list16").appendChild(td14);
    document.getElementById("list17").appendChild(td15);
+   
+   document.getElementById("list18").appendChild(td16);
+   document.getElementById("list18").appendChild(br16);
+
  //  document.getElementById("list9").appendChild(td9);
   }
   

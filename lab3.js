@@ -156,7 +156,7 @@ router.get('/schedulenames', (req,res) =>{
       console.log('sending request')
      // res.setHeader('Content-Type', 'application/json')
      // res.setHeader('Content-Type', 'index/html');
-    
+     //const newsub = req.body
      //res.flush()
      //res.write('<h1>Subject Name: ' + schedule[0].subject + '</h1>')
       var i = 0,
@@ -168,8 +168,9 @@ router.get('/schedulenames', (req,res) =>{
            
             if( schedule[i].name !=undefined)
             {
-              res.write('Schedule Name: ' + schedule[i].name )
-              res.write('Courses ' + schedule[i].courses )
+              res.write('Schedule Name: ' + schedule[i].name +' ' )
+              res.write('Courses: ' + schedule[i].courses )
+          //    res.write(newsub.catalog_nbr.length)
             }
             
             if(schedule[i].catalog_nbr1){
@@ -212,7 +213,7 @@ console.log(schedule1)
 
 
 
-///////////////////////// TASK 4////////////////////////////
+///////////////////////// TASK ////////////////////////////
 //item 5, save list of subject code and course code
 router.put('/schedule3', (req,res) =>
 {
@@ -309,6 +310,44 @@ router.put('/schedule4', (req,res) =>
        //enter in the following format "catalog_nbr","subject code" 
        console.log('Creating/Modifying new schedule')
        schedule[sub] = req.body;
+   }
+   res.send(newsub);
+  
+});
+//////////////////////////TASK 5////////////////////////////////
+
+
+router.post('/schedule90/:name', (req,res) =>
+{
+   const newsub = req.body
+   const sub1 = req.params.name
+   console.log("Subject: ", newsub)
+   //newsub.name =  parseInt(req.params.name)
+  // const nbr= req.params.name;
+  // const sub = schedule.findIndex(p=> p.name ===newsub.name)
+  const sub = schedule.findIndex(p=> p.name ===sub1)
+   console.log(newsub.name)
+   console.log(newsub.catalog_nbr.length)
+   console.log(sub)
+   //replace the part with new one.
+   //const sub = schedule.findIndex(p=> parseInt(p.name) === newsub.name);
+   
+   if(sub<1){
+       //create new schedule with the provided id 
+     console.log('Schedule not found')
+     res.status(404).send('Schedule not Found')
+     //schedule.push(req.body);
+
+   }
+   else{
+       //add course code and subject code
+       //enter in the following format "catalog_nbr","subject code" 
+       console.log('Creating/Modifying new schedule')
+       //schedule[sub] = req.body;
+       schedule[sub].catalog_nbr = req.body.catalog_nbr;
+     schedule[sub].subject = req.body.subject;
+       schedule[sub].courses += parseInt(req.body.courses)
+       console.log(req.body.courses)
    }
    res.send(newsub);
   
