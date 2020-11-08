@@ -71,8 +71,8 @@ router.get('/', (req,res) =>{
         for ( i=0 ;i < max; i++) {
            // console.log(i)
           // res.write('<h1>Subject Name: ' + schedule[0].subject + '</h1>')
-            res.write('Subject Name: ' + schedule[i].subject )
-            res.write('className: ' + schedule[i].className )
+            res.write('Subject Name: ' + schedule[i].subject + "  ")
+            res.write('className: ' + schedule[i].className + "  ")
            // res.end('Hello World');
             //console.log(schedule[i].subject)
             //res.send(schedule[i].subject)
@@ -116,22 +116,28 @@ res.status(404).send('Schedule not found');
 });
 
 /////////////////////////// TASK 3/////////////////////////////
-router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:course_info', (req,res) =>{
+router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:ssr_component', (req,res) =>{
   // /name with catalog_nbr
   //have to and the results
   const sub= req.params.subject; //replace name with catalognbr
   const sub1 = req.params.catalog_nbr;
   const sub2 = req.params.course_info;
   const subject1  = schedule.find(p => p.subject === (sub))
- const subject2  = schedule.find(p => p.catalog_nbr === (sub1))
+   const subject2  = schedule.find(p => p.catalog_nbr === (sub1))
+   const subject4  = schedule.find(p => p.course_info.ssr_component === (sub2))
+   const subject3  = schedule.find(p => p.catalog_nbr === parseInt(sub1))
 // const subject3  = schedule.find(p => p.course_info.ssr_component === (sub2))
  // console.log(schedule[0].catalog_nbr)
- console.log(sub)
- console.log(sub1)
- console.log(sub2)
+ //console.log(sub)
+ //console.log(sub1)
+ //console.log(sub2)
+ //console.log(subject1)
+ console.log(subject4)
+ //console.log(schedule[1].course_info[0].ssr_component)
+ //console.log(subject3)
 //  console.log(schedule[0].course_info[0].ssr_component)
-// console.log(subject2)
-// console.log(subject3)
+//console.log(subject2)
+ //console.log(subject1)
 //  console.log(subject2)
 // if(subject2 !=0 && subject1!=0){
 //console.log('yup')
@@ -140,7 +146,11 @@ router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:course_info',
 // console.log(subject2)
 // if(!subject1) res.status(404).send('Subject not found')
 //res.send(subject1)
-if(subject2){
+if (subject3){
+res.send(subject3)
+
+}
+if(subject2 && subject1 && subject4){
 res.send(subject2)
 }
 else{
@@ -149,6 +159,8 @@ res.status(404).send('Catalog not found');
 //const nbr= req.params.catalog_nbr;
 //res.send('working on it')
 });
+
+
 router.get('/schedulenames', (req,res) =>{
   //  const subject  = schedule.find(c => c.subject == parseInt(schedule.subject) )
         //(res.send(schedule[0].subject));
