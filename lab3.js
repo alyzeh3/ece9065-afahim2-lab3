@@ -126,19 +126,9 @@ router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:ssr_component
    const subject2  = schedule.find(p => p.catalog_nbr === (sub1))
    const subject4  = schedule.find(p => p.course_info.ssr_component === (sub2))
    const subject3  = schedule.find(p => p.catalog_nbr === parseInt(sub1))
-// const subject3  = schedule.find(p => p.course_info.ssr_component === (sub2))
- // console.log(schedule[0].catalog_nbr)
- //console.log(sub)
- //console.log(sub1)
- //console.log(sub2)
- //console.log(subject1)
- console.log(subject4)
- //console.log(schedule[1].course_info[0].ssr_component)
- //console.log(subject3)
-//  console.log(schedule[0].course_info[0].ssr_component)
-//console.log(subject2)
- //console.log(subject1)
-//  console.log(subject2)
+ console.log(subject1)
+ console.log(sub2)
+ 
 // if(subject2 !=0 && subject1!=0){
 //console.log('yup')
 
@@ -149,12 +139,20 @@ router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:ssr_component
 //if (subject3){
 //res.send(subject3)/
 //}
-if(subject3 && subject1 && subject4){
+if(subject2 && subject1 && subject4){
   console.log('hello')
-res.send(subject3)
+res.send(subject2)
 }
 if(subject1 == undefined){
 res.status(404).send('Catalog not found');
+}
+
+if(subject2 == undefined){
+  res.status(404).send('Catalog not found');
+  }
+
+if(subject4 == null){
+  res.send(subject2)
 }
 //const nbr= req.params.catalog_nbr;
 //res.send('working on it')
