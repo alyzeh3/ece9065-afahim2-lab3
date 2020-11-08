@@ -75,6 +75,8 @@ courses: "1"
 .then(data =>{console.log(data)})
 .catch(error => console.log(error))
 
+
+//////TASK 8////////
 fetch ('http://localhost:3000/api/subjects/schedulenames')
 .then(res => res.text())
 .then(data =>{console.log(data)})
