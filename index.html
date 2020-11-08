@@ -65,7 +65,7 @@ const schedulestu =  [
 
 
 <body onload="addOptions()">
-  Select Course No1
+  Select Courses
   <select id="dd">
   <option value="course">Course</option>
 </select>
@@ -18077,8 +18077,8 @@ function myFunction7() {
  </script>
 
 <script>
-  document.getElementById("dd").addEventListener("load", addOptions);
-  document.getElementById("dd1").addEventListener("load", addOptions1);
+ window.addEventListener("load", addOptions);
+  window.addEventListener("load", addOptions1);
 
   function addOptions(){
               //var jsonArray = JSON.parse(data);
@@ -18096,7 +18096,7 @@ function myFunction7() {
               var select = document.getElementById('dd1');
               var option;
               for (var i = 0; i < schedule.length; i++) {
-                option = document.createElement('option1');
+                option = document.createElement('option');
                 option.text = schedule[i]["className"];
                 select.add(option);
               }
@@ -18139,8 +18139,30 @@ function myFunction7() {
  // name = schedulestu[i]["name"];
   //document.getElementById("demo1").innerHTML = name;
     }
+    var element1 = {};
+      schedulestu.push(element1)
+    element1.name = name1;
+    var searchVal3= document.getElementById("dd1").value
+    for (var i = 0; i < schedule.length;i++){
+      //document.getElementById("demo1").innerHTML = schedulestu;
+      //schedulestu.push(name1);
+     
+      var searchVal3= document.getElementById("dd1").value
+      if (schedule[i].className === searchVal3) {
+        alert("hello")
+        element1.className = schedule[i].className;
+        element1.subject = schedule[i].subject;
+        element1.catalog_nbr = schedule[i].catalog_nbr;
+        element1.course_info = schedule[i].course_info;
+        element1.catalog_description = schedule[i].catalog_description;
+        console.log(schedulestu);
+      //  element.course_info[8].instructors = schedule[i].course_info[8].instructors;
+       console.log(schedule[i].course_info[0])
+        }
+ // name = schedulestu[i]["name"];
+  //document.getElementById("demo1").innerHTML = name;
+    }
       
-
 
     }
   </script>
