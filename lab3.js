@@ -146,14 +146,14 @@ router.get('/subject/:subject/course/:catalog_nbr/coursecomponent/:ssr_component
 // console.log(subject2)
 // if(!subject1) res.status(404).send('Subject not found')
 //res.send(subject1)
-if (subject3){
+//if (subject3){
+//res.send(subject3)/
+//}
+if(subject3 && subject1 && subject4){
+  console.log('hello')
 res.send(subject3)
-
 }
-if(subject2 && subject1 && subject4){
-res.send(subject2)
-}
-else{
+if(subject1 == undefined){
 res.status(404).send('Catalog not found');
 }
 //const nbr= req.params.catalog_nbr;
